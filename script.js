@@ -1,4 +1,4 @@
-// Variables used in multiple functions
+// Values used in multiple functions
 const moves = ["Rock", "Paper", "Scissors"];
 let computer = document.querySelector('.computer-score');
 let player = document.querySelector('.player-score');
@@ -14,6 +14,9 @@ window.onload = () => {
     if(localStorage.getItem("computerScore") && localStorage.getItem("playerScore")) {
         computer.innerHTML = localStorage.getItem("computerScore");
         player.innerHTML = localStorage.getItem("playerScore");
+    } else {
+        computer.innerHTML = "0";
+        player.innerHTML = "0";
     }
 }
 
@@ -50,6 +53,20 @@ const removePrevValue = (playerBtn,computerBtn) => {
     }
 }
 
+const updatePlayingArea = () => {
+    roundResult.classList.add('hide');
+    playerButtons.classList.remove('hide');
+    nextButton.classList.add('hide');
+    removePrevValue(playerSelectedBtn,computerSelectedBtn);
+}
+
+const playAgain = () => {
+    const replay = document.querySelector('.replay');
+    replay.addEventListener('click',() => {
+        updatePlayingArea();
+    });
+}
+
 const oneRoundResult = (message,playerChoice,computerChoice) => {
     const resultText = document.querySelector('.result-text');
     playerSelectedBtn.value = playerChoice;
@@ -59,12 +76,7 @@ const oneRoundResult = (message,playerChoice,computerChoice) => {
     resultText.innerHTML = message;
     playerButtons.classList.add('hide');
     roundResult.classList.remove('hide');
-    const replay = document.querySelector('.replay');
-    replay.addEventListener('click',() => {
-        roundResult.classList.add('hide');
-        playerButtons.classList.remove('hide');
-        removePrevValue(playerSelectedBtn,computerSelectedBtn);
-    });
+    playAgain();
 }
 
 const resultTally = (playerScore,computerScore) => {
@@ -74,6 +86,24 @@ const resultTally = (playerScore,computerScore) => {
     localStorage.setItem("playerScore",playerScore);
 }
 
+const showLayers = (p) => {
+    const playerChoice = document.querySelectorAll('.player-border');
+    const computerChoice = document.querySelectorAll('.computer-border'); 
+    switch(p) {
+        case "player":
+            playerChoice.forEach(choice => choice.classList.remove('layer-hide'));
+            computerChoice.forEach(choice => choice.classList.add('layer-hide'));
+            break;
+        case "computer": 
+            computerChoice.forEach(choice => choice.classList.remove('layer-hide'));
+            playerChoice.forEach(choice => choice.classList.add('layer-hide'));
+            break;
+        default: 
+            computerChoice.forEach(choice => choice.classList.add('layer-hide'));
+            playerChoice.forEach(choice => choice.classList.add('layer-hide'));
+            break;
+    }
+}
 
 const  result = (message) => {
     let playerScore = parseInt(player.innerHTML);
@@ -82,19 +112,21 @@ const  result = (message) => {
         case "You Win":
             playerScore++;
             nextButton.classList.remove('hide');
+            showLayers("player");
             resultTally(playerScore,computerScore);
             break;
         case "You Lose":
             computerScore++;
             nextButton.classList.add('hide');
+            showLayers("computer");
             resultTally(playerScore,computerScore);
             break;
         case "Tie":
             nextButton.classList.add('hide');
+            showLayers("");
             resultTally(playerScore,computerScore);
             break;
     }
-    
 }
 
 const toggleToHurray = (playingArea,victoryPage) => {
@@ -128,8 +160,10 @@ showVictory();
 
 const reset = () => {
     resetButton.addEventListener('click', () => {
-        resultTally(0,0);
-    }); 
+        resultTally("0","0");
+        nextButton.classList.add('hide');
+        updatePlayingArea();
+    });    
 }
 
 reset();

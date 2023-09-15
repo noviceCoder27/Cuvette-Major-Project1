@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Roboto+Mono:wght@400;500;600;700&display=swap');
 
 :root {
+    --black: rgba(0, 0, 0, 0.2);
+    --black-secondary: rgba(0, 0, 0, 0.13);
     --white: #FFFFFF;
     --gray: #656565;
     --blue: #0074B6;
@@ -16,7 +18,7 @@
     --green-lighter: #3B6720;
     --green-layer2: rgba(29, 168, 43, 0.79);
     --green-layer3: rgba(46, 154, 37, 0.39);
-    --black: #252525;
+    --dark: #252525;
     --slate: #000000A3;
     font-family: 'Roboto Mono', monospace;
 }
@@ -76,7 +78,7 @@ body {
 
 .computer-score, .player-score {
     font-size: clamp(1rem,3.5vw,4rem);
-    color: var(--black);
+    color: var(--dark);
     font-weight: 700;
     margin-left: auto;
     margin-right: auto;
@@ -97,7 +99,11 @@ body {
     border-radius: 100%;   
     padding: 1rem; 
     cursor: pointer;
-    box-shadow: inset 3px 0 21px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 3px 0 21px var(--black);
+}
+
+.play-btn:hover {
+    box-shadow: inset 3px 0 21px var(--white);
 }
 
 .Rock-btn {
@@ -120,6 +126,7 @@ body {
 .play-btn > img {
     width: 100%;
 }
+
 
 
 .top-section {
@@ -182,25 +189,36 @@ body {
     align-items: center;
 }
 
+.player-choice > h3, .computer-choice > h3{
+    position: absolute;
+    transform: translateY(-10px);
+}
+
+
 .outer-layer {
-    background-color: var(--green-layer3);
     border-radius: 100%;
-    padding: 1.5rem;
-    box-shadow: 0 1px 62px 0 rgba(0, 0, 0, 0.13);
+    border: 1.5rem solid var(--green-layer3);
+    box-shadow: 0 1px 62px 0 var(--black-secondary);
 }
 
 .middle-layer {
-    background-color: var(--green-layer2);
     border-radius: 100%;
-    padding: 1.5rem;
+    border: 1.5rem solid var(--green-layer2);
 }
 
 .inner-layer {
-    background-color: var(--green-lighter);
     border-radius: 100%;
-    padding: 2rem;
+    border: 2rem solid var(--green-lighter);
 }
 
+.player-btn, .computer-btn {
+    cursor: auto;
+    background-color: var(--white);
+}
+
+.player-btn:hover, .computer-btn:hover {
+    box-shadow: inset 3px 0 21px var(--black);
+}
 
 .replay {
     background-color: var(--white);
@@ -344,6 +362,11 @@ body {
     left: 30%;
     transform: translateY(10rem);
    
+}
+
+.layer-hide {
+    border: 1.5rem solid var(--green-light);
+    box-shadow: none;
 }
 
 .hide {
