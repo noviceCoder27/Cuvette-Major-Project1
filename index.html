@@ -3,27 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="assets/peace.png" type="image/x-icon">
+    <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <section>
-        <div></div>
-        <div >
-            <span id = "computer-score">0</span>
-            <span id = "player-score">0</span>
+    <div class="playing-area">
+        <section class = "score-card">
+            <div class = "title">
+                <h2>ROCK</h2>
+                <h2>PAPER</h2>
+                <h2>SCISSORS</h2>
+            </div>
+            <div class="score-tally">
+                <div class = "computer">
+                    <p>COMPUTER <br/> SCORE</p>
+                    <span class = "computer-score">0</span>
+                </div>
+                <div class = "player">
+                    <p>YOUR <br /> SCORE</p>
+                    <span class = "player-score">0</span>
+                </div>
+            </div>
+        </section>
+        <section class = "round-result hide">
+            <div class="player-choice">
+                <h3>YOU PICKED</h3>
+                <div class = "outer-layer">
+                    <div class = "middle-layer">
+                        <div class = "inner-layer">
+                            <button class = "player-btn play-btn">
+                                
+                            </button>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class = "result-section">
+                <div class = "result-text">
+                    <p class = "main-text"></p>
+                    <p class = "sub-text"></p>
+                </div>
+                <button class = "replay ">PLAY AGAIN</button>
+            </div>
+            <div class = "computer-choice">
+                <h3>PC PICKED</h3>
+                <div class="outer-layer">
+                    <div class="middle-layer">
+                        <div class="inner-layer">
+                            <button class = "computer-btn play-btn">
+                                
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <section class = "play-btns">
+            <div class = "top-section">
+                <button class = "play-btn Rock-btn" value = "Rock">
+                    <img src = "assets/Rock.png" alt = "Rock" class = "rock"/>
+                </button>
+                <div class = "connector-center"></div>
+                <button class = "play-btn Scissors-btn" value = "Scissors">
+                    <img src= "assets/Scissors.png" alt = "Scissors"/>
+                </button>
+            </div>
+            <div class = "bottom-section">
+                <div class = "connector-left"></div>
+                <button class = "play-btn Paper-btn" value="Paper">
+                    <img src= "assets/Paper.png" alt = "Paper" class = "paper"/>
+                </button>
+                <div class = "connector-right"></div>
+            </div>
+        </section>
+    </div>
+    <div class = "victory hide">
+        <div class="victory-image">
+            <img src="assets/Stars.png" alt="Stars" >
+            <img src="assets/Trophy.png" alt="Trophy" class="trophy">
         </div>
-    </section>
-    <section>
-        <button class = "play-btn">Rock</button>
-        <button class = "play-btn">Paper</button>
-        <button class = "play-btn">Scissors</button>
-    </section>
-    <section>
-        <button>Rules</button>
-        <a href = "victory.html" class = "next">Next</a>
-        <button id = "reset">Reset</button>
+        <div class="victory-message">
+            <h1>HURRAY!!</h1>
+            <h2>YOU WON THE GAME</h2>
+            <button class = "play-again replay">PLAY AGAIN</button>
+        </div>
+        
+    </div>
+    <div class = "rule-box hide">
+        <div class="cross">
+            <span>X</span>
+        </div>
+        <div class = "list-rules">
+            <h3>Game Rules</h3>
+            <div class="rule">
+                <span></span>
+                <p>Rock beats scissors, scissors beat paper, and paper beats rock.</p>
+            </div>
+            <div class="rule">
+                <span></span>
+                <p>Agree ahead of time whether you'll count off “rock, paper, scissors, shoot” or just “rock, paper, scissors.”</p>
+            </div>
+            <div class="rule">
+                <span></span>
+                <p>Use rock, paper, scissors to settle minor decisions or simply play to pass the time</p>
+            </div>
+            <div class="rule">
+                <span></span>
+                <p>If both players lay down the same hand, each player lays down another hand</p>
+            </div>
+        </div>
+    </div>
+    <section class = "buttons">
+        <div>
+            <button class = "reset">RESET</button>
+        </div>
+        <div>
+            <button class = "rules">RULES</button>
+            <button class = "next hide">NEXT</button>
+        </div>
     </section>
 </body>
 </html>

@@ -1,7 +1,355 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+    --white: #FFFFFF;
+    --gray: #656565;
+    --blue: #0074B6;
+    --purple: #BD00FF;
+    --dark-yellow: #FFA943;
+    --light-yellow: #FFD600;
+    --red: #FF0000;
+    --green: #1DA82BC9;
+    --green-light: #8CC461;
+    --green-dark: #2E9A2563;
+    --green-extradark: #004429;
+    --green-lighter: #3B6720;
+    --green-layer2: rgba(29, 168, 43, 0.79);
+    --green-layer3: rgba(46, 154, 37, 0.39);
+    --black: #252525;
+    --slate: #000000A3;
+    font-family: 'Roboto Mono', monospace;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--green-light);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.score-card {
+    margin-top: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 60vw;
+    border: 2px solid var(--white);
+    border-radius: 13px;
+    padding: 1rem;
+}
+
+.title {
+    font-weight: 600;
+    line-height: 1rem;
+}
+
+.title h2 {
+    font-size: clamp(1rem,2.5vw,3rem);
+}
+
+.score-tally {
+    display: flex;
+    gap: 1rem;
+}
+
+.computer, .player {
+    min-width: 10vw;
+    text-align: center;
+    color: var(--gray);
+    background-color: var(--white);
+    border-radius: 9px;
+}
+
+.computer > p, .player > p {
+    font-size: clamp(0.8rem,1.3vw,2rem);
+    font-weight: 600;
+}
+
+.computer-score, .player-score {
+    font-size: clamp(1rem,3.5vw,4rem);
+    color: var(--black);
+    font-weight: 700;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.play-btns {
+    width: 40vw;
+    min-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+}
+
+.play-btn {
+    border: none;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 100%;   
+    padding: 1rem; 
+    cursor: pointer;
+    box-shadow: inset 3px 0 21px rgba(0, 0, 0, 0.2);
+}
+
+.Rock-btn {
+    border: 16px solid var(--blue);
+}
+
+.Scissors-btn {
+    border: 16px solid var(--purple);
+    padding: 2rem;
+}
+
+.Scissors-btn > img {
+    transform: translateY(-10px);
+}
+
+.Paper-btn {
+    border: 16px solid var(--light-yellow);
+}
+
+.play-btn > img {
+    width: 100%;
+}
+
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.connector-center {
+    margin-top: auto;
+    margin-bottom: auto;
+    border-top: 15px solid var(--slate);
+    flex: 1;
+}
+
+.bottom-section {
+    display: flex;
+    padding-top: 5rem;
+    justify-content: center;
+}
+
+.connector-left {
+    width: 20rem;
+    z-index: -10;
+    transform: rotate(45deg) translateY(-3vw);
+    border-top: 15px solid var(--slate);
+}
+
+.connector-right {
+    width: 20rem;
+    z-index: -1;
+    transform: rotate(-45deg) translateY(-3vw);
+    border-top: 15px solid var(--slate);
+}
+
+.round-result {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.result-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    
+}
+.result-text {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+
+.player-choice, .computer-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.outer-layer {
+    background-color: var(--green-layer3);
+    border-radius: 100%;
+    padding: 1.5rem;
+    box-shadow: 0 1px 62px 0 rgba(0, 0, 0, 0.13);
+}
+
+.middle-layer {
+    background-color: var(--green-layer2);
+    border-radius: 100%;
+    padding: 1.5rem;
+}
+
+.inner-layer {
+    background-color: var(--green-lighter);
+    border-radius: 100%;
+    padding: 2rem;
+}
+
+
+.replay {
+    background-color: var(--white);
+    border: none;
+    color: var(--gray);
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.buttons {
+    margin-top: auto;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.rules, .next, .reset {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 2rem;
+}
+
+
 .next {
+    margin-left: -1rem;
+}
+
+
+.rule-box {
+    max-width: 300px;
+    margin-left: auto;
+    margin-top: -20rem;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    border-radius: 13px;
+    padding:  1rem;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cross {
+    background-color: var(--red);
+    position: absolute;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    top: -40px;
+    right: -25px;
+    border: 7px solid var(--white);
+    cursor: pointer;
+
+}
+
+.cross > span{
+    font-size: 3.5rem;
+    font-family: 'Dangrek', cursive;
+    font-weight: 400;
+}
+
+.list-rules {
+    border-radius: 13px;
+    background-color: var(--green-extradark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.list-rules h3 {
+    font-size: 1.8rem;
+    margin: 0.5rem;
+}
+
+.rule {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rule > span {
+    width: 1rem;
+    height: 0.6rem;
+    background-color: var(--dark-yellow);
+    
+}
+
+.rule p {
+    font-size: 0.8rem;
+}
+
+.victory {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.victory-image {
+    margin-bottom: 2rem;
+}
+
+.victory-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 3rem;
+    margin-top: 5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.victory-message h1, .victory-message h2 {
+    margin: 0;
+}
+
+.victory-message h1 {
+    font-size: 4.5rem;
+}
+
+.victory-message h2 {
+    font-size: 2.5rem;
+}
+
+.victory-message button {
+    margin-top: 2rem;
+}
+.trophy {
+    position: absolute;
+    left: 30%;
+    transform: translateY(10rem);
+   
+}
+
+.hide {
     display: none;
 }
 
-.show {
-    display: inline;
-}
+
+
+
