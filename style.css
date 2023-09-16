@@ -56,6 +56,7 @@ body {
 
 .title h2 {
     font-size: clamp(1rem,2.5vw,3rem);
+    letter-spacing: 0.2rem;
 }
 
 .score-tally {
@@ -74,10 +75,13 @@ body {
 .computer > p, .player > p {
     font-size: clamp(0.8rem,1.3vw,2rem);
     font-weight: 600;
+    margin: 0;
+    margin-top: 0.5rem;
+    letter-spacing: 0.1rem;
 }
 
 .computer-score, .player-score {
-    font-size: clamp(1rem,3.5vw,4rem);
+    font-size: clamp(1rem,5vw,6rem);
     color: var(--dark);
     font-weight: 700;
     margin-left: auto;
@@ -85,8 +89,9 @@ body {
 }
 
 .play-btns {
-    width: 40vw;
-    min-width: 700px;
+    width: 30vw;
+    min-width: 400px;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5rem;
@@ -96,8 +101,11 @@ body {
     border: none;
     width: 10rem;
     height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 100%;   
-    padding: 1rem; 
+    padding: 1.5rem; 
     cursor: pointer;
     box-shadow: inset 3px 0 21px var(--black);
 }
@@ -106,17 +114,22 @@ body {
     box-shadow: inset 3px 0 21px var(--white);
 }
 
+.play-btn:hover > img {
+    transform: scale(120%);
+}
+
 .Rock-btn {
     border: 16px solid var(--blue);
 }
 
 .Scissors-btn {
     border: 16px solid var(--purple);
-    padding: 2rem;
+    padding: 2.5rem;
 }
 
-.Scissors-btn > img {
-    transform: translateY(-10px);
+
+.Paper-btn {
+    min-width: 10rem;
 }
 
 .Paper-btn {
@@ -126,9 +139,6 @@ body {
 .play-btn > img {
     width: 100%;
 }
-
-
-
 .top-section {
     display: flex;
     justify-content: space-between;
@@ -147,17 +157,20 @@ body {
     justify-content: center;
 }
 
+
 .connector-left {
-    width: 20rem;
+    height: 0px;
+    flex-grow: 1;
     z-index: -10;
-    transform: rotate(45deg) translateY(-3vw);
+    transform: rotate(60deg) translateY(-5vw);
     border-top: 15px solid var(--slate);
 }
 
 .connector-right {
-    width: 20rem;
+    height: 0px;
+    flex-grow: 1;
     z-index: -1;
-    transform: rotate(-45deg) translateY(-3vw);
+    transform: rotate(-60deg) translateY(-5vw);
     border-top: 15px solid var(--slate);
 }
 
@@ -222,13 +235,19 @@ body {
 
 .replay {
     background-color: var(--white);
-    border: none;
+    border: 2px solid var(--green-light);
     color: var(--gray);
     font-weight: 600;
     font-size: 1.5rem;
     padding: 1rem 2rem;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.replay:hover {
+    background-color: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
 }
 
 .buttons {
@@ -247,8 +266,13 @@ body {
     border-radius: 10px;
     cursor: pointer;
     margin: 0 2rem;
+    letter-spacing: 0.1rem;
 }
 
+.rules:hover, .next:hover, .reset:hover {
+    background-color: var(--white);
+    color: var(--gray);
+}
 
 .next {
     margin-left: -1rem;
@@ -263,11 +287,11 @@ body {
     margin-bottom: 1rem;
     position: relative;
     border-radius: 13px;
-    padding:  1rem;
+    padding:  0.5rem;
     background-color: var(--white);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
 }
 
 .cross {
@@ -292,7 +316,7 @@ body {
     font-weight: 400;
 }
 
-.list-rules {
+.rules-content {
     border-radius: 13px;
     background-color: var(--green-extradark);
     display: flex;
@@ -301,28 +325,27 @@ body {
     padding: 1rem;
 }
 
-.list-rules h3 {
-    font-size: 1.8rem;
-    margin: 0.5rem;
+.rules-content h3 {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
 }
-
-.rule {
+.list-rules {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.rule > span {
-    width: 1rem;
-    height: 0.6rem;
-    background-color: var(--dark-yellow);
-    
+.list-rules li {
+    list-style-type: square;
 }
 
-.rule p {
+li::marker {
+    color: var(--dark-yellow);
+}
+.rule {
     font-size: 0.8rem;
+    font-weight: 400;
 }
-
 .victory {
     position: relative;
     margin-top: 2rem;
@@ -369,8 +392,16 @@ body {
     box-shadow: none;
 }
 
+.rule-hide {
+    opacity: 0;
+}
+
 .hide {
     display: none;
+}
+
+.zoom {
+    scale: 120%;
 }
 
 

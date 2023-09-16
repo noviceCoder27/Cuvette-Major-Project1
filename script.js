@@ -20,25 +20,13 @@ window.onload = () => {
     }
 }
 
-const assignIconToPlayer = (playerBtn) => {
+const assignIconToButton = (btn) => {
     const img = document.createElement("img");
-    if(playerBtn) {
-        img.setAttribute('src', `./assets/${playerBtn.value}.png`);
-        img.setAttribute('alt', `${playerBtn.value}`);
-        playerBtn.appendChild(img);
-        playerBtn.classList.add(`${playerBtn.value}-btn`);
-    } else {
-        throw Error('Error while receiving value');
-    }
-}
-
-const assignIconToComputer = (computerBtn) => {
-    const img = document.createElement("img");
-    if(computerBtn) {
-        img.setAttribute('src', `./assets/${computerBtn.value}.png`);
-        img.setAttribute('alt', `${computerBtn.value}`);
-        computerBtn.appendChild(img);
-        computerBtn.classList.add(`${computerBtn.value}-btn`);
+    if(btn) {
+        img.setAttribute('src', `./assets/${btn.value}.png`);
+        img.setAttribute('alt', `${btn.value}`);
+        btn.appendChild(img);
+        btn.classList.add(`${btn.value}-btn`);
     } else {
         throw Error('Error while receiving value');
     }
@@ -71,8 +59,8 @@ const oneRoundResult = (message,playerChoice,computerChoice) => {
     const resultText = document.querySelector('.result-text');
     playerSelectedBtn.value = playerChoice;
     computerSelectedBtn.value = computerChoice;
-    assignIconToPlayer(playerSelectedBtn);
-    assignIconToComputer(computerSelectedBtn);
+    assignIconToButton(playerSelectedBtn);
+    assignIconToButton(computerSelectedBtn);
     resultText.innerHTML = message;
     playerButtons.classList.add('hide');
     roundResult.classList.remove('hide');
@@ -173,10 +161,10 @@ const toggleRuleBox = () => {
     const closeButton = document.querySelector('.cross'); 
     const openButton = document.querySelector('.rules');
     openButton.addEventListener('click', () => {
-        rulesBox.classList.remove('hide');
+        rulesBox.classList.remove('rule-hide');
     });
     closeButton.addEventListener('click', () => {
-        rulesBox.classList.add('hide');
+        rulesBox.classList.add('rule-hide');
     });
 }
 
