@@ -1,23 +1,73 @@
 // Values used in multiple functions
 const moves = ["Rock", "Paper", "Scissors"];
 let computer = document.querySelector('.computer-score');
-let player = document.querySelector('.player-score');
+let user = document.querySelector('.player-score');
 const nextButton = document.querySelector('.next');
 const resetButton = document.querySelector('.reset');
-const playerButtons = document.querySelector('.play-btns');
+const playingButtons = document.querySelector('.play-btns');
 const roundResult = document.querySelector('.round-result');
-const playerSelectedBtn = document.querySelector('.player-btn');
-const computerSelectedBtn = document.querySelector('.computer-btn');
+const userSelectedButton = document.querySelector('.player-btn');
+const computerSelectedButton = document.querySelector('.computer-btn');
 //
 
 window.onload = () => {
     if(localStorage.getItem("computerScore") && localStorage.getItem("playerScore")) {
         computer.innerHTML = localStorage.getItem("computerScore");
-        player.innerHTML = localStorage.getItem("playerScore");
+        user.innerHTML = localStorage.getItem("playerScore");
     } else {
         computer.innerHTML = "0";
-        player.innerHTML = "0";
+        user.innerHTML = "0";
     }
+}
+
+function computerMove() {
+    const random = Math.floor(Math.random()*moves.length);
+    return moves[random];
+}
+
+computerMove();
+
+function userMove() {
+    const buttons = document.querySelectorAll('.play-btn');
+    buttons.forEach(btn => btn.addEventListener('click',(e) => {
+        const myMove =  e.target.value || e.target.parentElement.value;
+        const pcMove = computerMove();
+        const resultMessage = decideWinner(myMove,pcMove);
+        oneRoundResult(resultMessage,myMove,pcMove);
+        result(resultMessage);
+    }));
+}
+
+userMove();
+
+const decideWinner = (player1,player2) => {
+    if(moves.includes(player1) && moves.includes(player2)) {
+        switch(player1) {
+            case "Rock":
+                if(player2 === "Rock") return "TIE UP";
+                if(player2 === "Paper") return "YOU LOSE";
+                return "YOU WIN";
+            case "Paper":
+                if(player2 === "Rock") return "YOU WIN";
+                if(player2 === "Paper") return "TIE UP";
+                return "YOU LOSE";
+            case "Scissors":
+                if(player2 === "Rock") return "YOU LOSE";
+                if(player2 === "Paper") return "TIE WIN";
+                return "TIE UP";
+        }
+    } else {
+        throw Error("Invalid Move");
+    }
+}
+
+const oneRoundResult = (message,userChoice,computerChoice) => {
+    const resultText = document.querySelector('.result-text');
+    userSelectedButton.value = userChoice;
+    computerSelectedButton.value = computerChoice;
+    assignIconToButton(userSelectedButton);
+    assignIconToButton(computerSelectedButton);
+    displayResultMessage(message,resultText)
 }
 
 const assignIconToButton = (btn) => {
@@ -32,29 +82,6 @@ const assignIconToButton = (btn) => {
     }
 }
 
-const removePrevValue = (playerBtn,computerBtn) => {
-    if(playerBtn.firstElementChild && computerBtn.firstElementChild) {
-        playerBtn.removeChild(playerBtn.firstElementChild);
-        computerBtn.removeChild(computerBtn.firstElementChild);
-        playerBtn.classList.remove(`${playerBtn.value}-btn`);
-        computerBtn.classList.remove(`${computerBtn.value}-btn`);
-    }
-}
-
-const updatePlayingArea = () => {
-    roundResult.classList.add('hide');
-    playerButtons.classList.remove('hide');
-    nextButton.classList.add('hide');
-    removePrevValue(playerSelectedBtn,computerSelectedBtn);
-}
-
-const playAgain = () => {
-    const replay = document.querySelector('.replay');
-    replay.addEventListener('click',() => {
-        updatePlayingArea();
-    });
-}
-
 const displayResultMessage = (message,resultText) => {
     if(message !== "TIE UP") {
         resultText.innerHTML = 
@@ -66,69 +93,98 @@ const displayResultMessage = (message,resultText) => {
         resultText.innerHTML = message;
     }
     
-    playerButtons.classList.add('hide');
+    playingButtons.classList.add('hide');
     roundResult.classList.remove('hide');
     playAgain();
 }
 
-const oneRoundResult = (message,playerChoice,computerChoice) => {
-    const resultText = document.querySelector('.result-text');
-    playerSelectedBtn.value = playerChoice;
-    computerSelectedBtn.value = computerChoice;
-    assignIconToButton(playerSelectedBtn);
-    assignIconToButton(computerSelectedBtn);
-    displayResultMessage(message,resultText)
+const playAgain = () => {
+    const replay = document.querySelector('.replay');
+    replay.addEventListener('click',() => {
+        updatePlayingArea();
+    });
 }
 
-const resultTally = (playerScore,computerScore) => {
-    computer.innerHTML = String(computerScore);
-    player.innerHTML = String(playerScore);
-    localStorage.setItem("computerScore",computerScore);
-    localStorage.setItem("playerScore",playerScore);
+const updatePlayingArea = () => {
+    roundResult.classList.add('hide');
+    playingButtons.classList.remove('hide');
+    nextButton.classList.add('hide');
+    removePrevValue(userSelectedButton,computerSelectedButton);
 }
 
-const showLayers = (p) => {
-    const playerChoice = document.querySelectorAll('.player-border');
-    const computerChoice = document.querySelectorAll('.computer-border'); 
-    switch(p) {
-        case "player":
-            playerChoice.forEach(choice => choice.classList.remove('layer-hide'));
-            computerChoice.forEach(choice => choice.classList.add('layer-hide'));
-            break;
-        case "computer": 
-            computerChoice.forEach(choice => choice.classList.remove('layer-hide'));
-            playerChoice.forEach(choice => choice.classList.add('layer-hide'));
-            break;
-        default: 
-            computerChoice.forEach(choice => choice.classList.add('layer-hide'));
-            playerChoice.forEach(choice => choice.classList.add('layer-hide'));
-            break;
+const removePrevValue = (userBtn,computerBtn) => {
+    if(userBtn.firstElementChild && computerBtn.firstElementChild) {
+        userBtn.removeChild(userBtn.firstElementChild);
+        computerBtn.removeChild(computerBtn.firstElementChild);
+        userBtn.classList.remove(`${userBtn.value}-btn`);
+        computerBtn.classList.remove(`${computerBtn.value}-btn`);
     }
 }
 
-const  result = (message) => {
-    let playerScore = parseInt(player.innerHTML);
+const result = (message) => {
+    let userScore = parseInt(user.innerHTML);
     let computerScore = parseInt(computer.innerHTML);
     switch(message) {
         case "YOU WIN":
-            playerScore++;
+            userScore++;
             nextButton.classList.remove('hide');
-            showLayers("player");
-            resultTally(playerScore,computerScore);
+            showLayersOverButton("user");
+            resultTally(userScore,computerScore);
             break;
         case "YOU LOSE":
             computerScore++;
             nextButton.classList.add('hide');
-            showLayers("computer");
-            resultTally(playerScore,computerScore);
+            showLayersOverButton("computer");
+            resultTally(userScore,computerScore);
             break;
         case "TIE UP":
             nextButton.classList.add('hide');
-            showLayers("");
-            resultTally(playerScore,computerScore);
+            showLayersOverButton("");
+            resultTally(userScore,computerScore);
+            break;
+        default:
+            throw Error("Error receiving message");
+    }
+}
+
+const showLayersOverButton = (player) => {
+    const userChoice = document.querySelectorAll('.player-border');
+    const computerChoice = document.querySelectorAll('.computer-border'); 
+    switch(player) {
+        case "user":
+            userChoice.forEach(choice => choice.classList.remove('layer-hide'));
+            computerChoice.forEach(choice => choice.classList.add('layer-hide'));
+            break;
+        case "computer": 
+            computerChoice.forEach(choice => choice.classList.remove('layer-hide'));
+            userChoice.forEach(choice => choice.classList.add('layer-hide'));
+            break;
+        default: 
+            computerChoice.forEach(choice => choice.classList.add('layer-hide'));
+            userChoice.forEach(choice => choice.classList.add('layer-hide'));
             break;
     }
 }
+
+const resultTally = (userScore,computerScore) => {
+    computer.innerHTML = String(computerScore);
+    user.innerHTML = String(userScore);
+    localStorage.setItem("computerScore",computerScore);
+    localStorage.setItem("playerScore",userScore);
+}
+
+const showVictory = () => {
+    const playingArea = document.querySelector('.playing-area');
+    const victoryPage = document.querySelector('.victory');
+    const playAgain = document.querySelector('.play-again');
+    nextButton.addEventListener('click', () => toggleToHurray(playingArea,victoryPage));
+    playAgain.addEventListener('click',() => {
+        removePrevValue(userSelectedButton,computerSelectedButton);
+        toggleToPlayingArea(playingArea,victoryPage)
+    });
+}
+
+showVictory();
 
 const toggleToHurray = (playingArea,victoryPage) => {
     nextButton.classList.add('hide');
@@ -139,25 +195,11 @@ const toggleToHurray = (playingArea,victoryPage) => {
 
 const toggleToPlayingArea = (playingArea,victoryPage) => {
     resetButton.classList.remove('hide');
-    playerButtons.classList.remove('hide');
+    playingButtons.classList.remove('hide');
     playingArea.classList.remove('hide');
     roundResult.classList.add('hide');
     victoryPage.classList.add('hide');
 }
-
-
-const showVictory = () => {
-    const playingArea = document.querySelector('.playing-area');
-    const victoryPage = document.querySelector('.victory');
-    const playAgain = document.querySelector('.play-again');
-    nextButton.addEventListener('click', () => toggleToHurray(playingArea,victoryPage));
-    playAgain.addEventListener('click',() => {
-        removePrevValue(playerSelectedBtn,computerSelectedBtn);
-        toggleToPlayingArea(playingArea,victoryPage)
-    });
-}
-
-showVictory();
 
 const reset = () => {
     resetButton.addEventListener('click', () => {
@@ -183,39 +225,6 @@ const toggleRuleBox = () => {
 
 toggleRuleBox();
 
-const winner = (player1,player2) => {
-    if(moves.includes(player1) && moves.includes(player2)) {
-        switch(player1) {
-            case "Rock":
-                return player2 === "Rock" ? "TIE UP": player2 === "Paper" ? "YOU LOSE": "YOU WIN";
-            case "Paper":
-                return player2 === "Rock" ? "YOU WIN": player2 === "Paper" ? "TIE UP": "YOU LOSE";
-            case "Scissors":
-                return player2 === "Rock" ? "YOU LOSE": player2 === "Paper" ? "YOU WIN": "TIE UP";
-        }
-    } else {
-        throw Error("Invalid Move");
-    }
-}
 
-function computerMove() {
-    const random = Math.floor(Math.random()*moves.length);
-    return moves[random];
-}
-
-computerMove();
-
-function playerMove() {
-    const buttons = document.querySelectorAll('.play-btn');
-    buttons.forEach(btn => btn.addEventListener('click',(e) => {
-        const myMove =  e.target.value || e.target.parentElement.value;
-        const pcMove = computerMove();
-        const winnerMessage = winner(myMove,pcMove);
-        oneRoundResult(winnerMessage,myMove,pcMove);
-        result(winnerMessage);
-    }));
-}
-
-playerMove();
 
 
