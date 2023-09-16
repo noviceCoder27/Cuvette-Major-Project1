@@ -55,16 +55,29 @@ const playAgain = () => {
     });
 }
 
+const displayResultMessage = (message,resultText) => {
+    if(message !== "TIE UP") {
+        resultText.innerHTML = 
+        `
+        <p class = "main-text">${message}</p>
+        <p class = "sub-text">AGAINST PC</p>
+        `;
+    } else {
+        resultText.innerHTML = message;
+    }
+    
+    playerButtons.classList.add('hide');
+    roundResult.classList.remove('hide');
+    playAgain();
+}
+
 const oneRoundResult = (message,playerChoice,computerChoice) => {
     const resultText = document.querySelector('.result-text');
     playerSelectedBtn.value = playerChoice;
     computerSelectedBtn.value = computerChoice;
     assignIconToButton(playerSelectedBtn);
     assignIconToButton(computerSelectedBtn);
-    resultText.innerHTML = message;
-    playerButtons.classList.add('hide');
-    roundResult.classList.remove('hide');
-    playAgain();
+    displayResultMessage(message,resultText)
 }
 
 const resultTally = (playerScore,computerScore) => {
@@ -97,19 +110,19 @@ const  result = (message) => {
     let playerScore = parseInt(player.innerHTML);
     let computerScore = parseInt(computer.innerHTML);
     switch(message) {
-        case "You Win":
+        case "YOU WIN":
             playerScore++;
             nextButton.classList.remove('hide');
             showLayers("player");
             resultTally(playerScore,computerScore);
             break;
-        case "You Lose":
+        case "YOU LOSE":
             computerScore++;
             nextButton.classList.add('hide');
             showLayers("computer");
             resultTally(playerScore,computerScore);
             break;
-        case "Tie":
+        case "TIE UP":
             nextButton.classList.add('hide');
             showLayers("");
             resultTally(playerScore,computerScore);
@@ -174,11 +187,11 @@ const winner = (player1,player2) => {
     if(moves.includes(player1) && moves.includes(player2)) {
         switch(player1) {
             case "Rock":
-                return player2 === "Rock" ? "Tie": player2 === "Paper" ? "You Lose": "You Win";
+                return player2 === "Rock" ? "TIE UP": player2 === "Paper" ? "YOU LOSE": "YOU WIN";
             case "Paper":
-                return player2 === "Rock" ? "You Win": player2 === "Paper" ? "Tie": "You Lose";
+                return player2 === "Rock" ? "YOU WIN": player2 === "Paper" ? "TIE UP": "YOU LOSE";
             case "Scissors":
-                return player2 === "Rock" ? "You Lose": player2 === "Paper" ? "You Win": "Tie";
+                return player2 === "Rock" ? "YOU LOSE": player2 === "Paper" ? "YOU WIN": "TIE UP";
         }
     } else {
         throw Error("Invalid Move");

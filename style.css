@@ -114,7 +114,7 @@ body {
     box-shadow: inset 3px 0 21px var(--white);
 }
 
-.play-btn:hover > img {
+.playable:hover > img {
     transform: scale(120%);
 }
 
@@ -191,10 +191,21 @@ body {
     
 }
 .result-text {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 700;
+    text-align: center;
+    
 }
 
+.main-text {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.sub-text {
+    font-size: 1.8rem;
+    margin: 0;
+}
 
 .player-choice, .computer-choice {
     display: flex;
@@ -398,10 +409,6 @@ li::marker {
 
 .hide {
     display: none;
-}
-
-.zoom {
-    scale: 120%;
 }
 
 
