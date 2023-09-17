@@ -1,7 +1,7 @@
 // Values used in multiple functions
 const moves = ["Rock", "Paper", "Scissors"];
-let computer = document.querySelector('.computer-score');
-let user = document.querySelector('.player-score');
+const computerScoreElement = document.querySelector('.computer-score');
+const userScoreElement = document.querySelector('.player-score');
 const nextButton = document.querySelector('.next');
 const resetButton = document.querySelector('.reset');
 const playingButtons = document.querySelector('.play-btns');
@@ -12,11 +12,11 @@ const computerSelectedButton = document.querySelector('.computer-btn');
 
 window.onload = () => {
     if(localStorage.getItem("computerScore") && localStorage.getItem("playerScore")) {
-        computer.innerHTML = localStorage.getItem("computerScore");
-        user.innerHTML = localStorage.getItem("playerScore");
+        computerScoreElement.innerHTML = localStorage.getItem("computerScore");
+        userScoreElement.innerHTML = localStorage.getItem("playerScore");
     } else {
-        computer.innerHTML = "0";
-        user.innerHTML = "0";
+        computerScoreElement.innerHTML = "0";
+        userScoreElement.innerHTML = "0";
     }
 }
 
@@ -53,7 +53,7 @@ const decideWinner = (player1,player2) => {
                 return "YOU LOSE";
             case "Scissors":
                 if(player2 === "Rock") return "YOU LOSE";
-                if(player2 === "Paper") return "TIE WIN";
+                if(player2 === "Paper") return "YOU WIN";
                 return "TIE UP";
         }
     } else {
@@ -67,7 +67,7 @@ const oneRoundResult = (message,userChoice,computerChoice) => {
     computerSelectedButton.value = computerChoice;
     assignIconToButton(userSelectedButton);
     assignIconToButton(computerSelectedButton);
-    displayResultMessage(message,resultText)
+    displayResultMessage(message,resultText);
 }
 
 const assignIconToButton = (btn) => {
@@ -122,8 +122,8 @@ const removePrevValue = (userBtn,computerBtn) => {
 }
 
 const result = (message) => {
-    let userScore = parseInt(user.innerHTML);
-    let computerScore = parseInt(computer.innerHTML);
+    let userScore = parseInt(userScoreElement.innerHTML);
+    let computerScore = parseInt(computerScoreElement.innerHTML);
     switch(message) {
         case "YOU WIN":
             userScore++;
@@ -167,8 +167,8 @@ const showLayersOverButton = (player) => {
 }
 
 const resultTally = (userScore,computerScore) => {
-    computer.innerHTML = String(computerScore);
-    user.innerHTML = String(userScore);
+    computerScoreElement.innerHTML = String(computerScore);
+    userScoreElement.innerHTML = String(userScore);
     localStorage.setItem("computerScore",computerScore);
     localStorage.setItem("playerScore",userScore);
 }
@@ -180,7 +180,7 @@ const showVictory = () => {
     nextButton.addEventListener('click', () => toggleToHurray(playingArea,victoryPage));
     playAgain.addEventListener('click',() => {
         removePrevValue(userSelectedButton,computerSelectedButton);
-        toggleToPlayingArea(playingArea,victoryPage)
+        toggleToPlayingArea(playingArea,victoryPage);
     });
 }
 

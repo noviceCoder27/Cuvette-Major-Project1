@@ -90,8 +90,9 @@ body {
 
 .play-btns {
     width: 30vw;
-    min-width: 400px;
-    max-width: 700px;
+    height: 30vw;
+    min-width: 450px;
+    max-width: 550px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5rem;
@@ -162,7 +163,7 @@ body {
     height: 0px;
     flex-grow: 1;
     z-index: -10;
-    transform: rotate(60deg) translateY(-5vw);
+    transform: rotate(60deg) translateY(-60px);
     border-top: 15px solid var(--slate);
 }
 
@@ -170,7 +171,7 @@ body {
     height: 0px;
     flex-grow: 1;
     z-index: -1;
-    transform: rotate(-60deg) translateY(-5vw);
+    transform: rotate(-60deg) translateY(-60px);
     border-top: 15px solid var(--slate);
 }
 
@@ -178,6 +179,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5rem;
+    height: 30vw;
     display: flex;
     justify-content: space-between;
 }
@@ -262,9 +264,9 @@ body {
 }
 
 .buttons {
-    margin-top: auto;
     display: flex;
     width: 100%;
+    margin-bottom: 1rem;
     justify-content: space-between;
 }
 .rules, .next, .reset {
@@ -293,11 +295,10 @@ body {
 .rule-box {
     max-width: 300px;
     margin-left: auto;
-    margin-top: -20rem;
     margin-right: 2rem;
-    margin-bottom: 1rem;
-    position: relative;
+    margin-bottom: 2rem;
     border-radius: 13px;
+    position: relative;
     padding:  0.5rem;
     background-color: var(--white);
     display: flex;
@@ -370,7 +371,6 @@ li::marker {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 3rem;
     margin-top: 5rem;
     font-weight: 600;
     text-align: center;
@@ -381,15 +381,17 @@ li::marker {
 }
 
 .victory-message h1 {
-    font-size: 4.5rem;
+    letter-spacing: 0.5rem;
+    font-size: clamp(2.5rem,6vw,6rem);
 }
 
 .victory-message h2 {
-    font-size: 2.5rem;
+    letter-spacing: 0.5rem;
+    font-size: clamp(1.5rem,2.5vw,2.5rem);
 }
 
 .victory-message button {
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 .trophy {
     position: absolute;
