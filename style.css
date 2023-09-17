@@ -31,10 +31,12 @@ body {
     background-color: var(--green-light);
     color: var(--white);
     min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    position: relative;
 }
 
 .score-card {
@@ -95,7 +97,7 @@ body {
     max-width: 550px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5rem;
+    margin-top: 10rem;
 }
 
 .play-btn {
@@ -178,10 +180,12 @@ body {
 .round-result {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5rem;
+    margin-top: 10rem;
     height: 30vw;
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
+    max-width: 1000px;
 }
 
 .result-section {
@@ -190,6 +194,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
+    margin-top: 5rem;
     
 }
 .result-text {
@@ -266,6 +271,7 @@ body {
 .buttons {
     display: flex;
     width: 100%;
+    margin-top: auto;
     margin-bottom: 1rem;
     justify-content: space-between;
 }
@@ -296,9 +302,11 @@ body {
     max-width: 300px;
     margin-left: auto;
     margin-right: 2rem;
-    margin-bottom: 2rem;
     border-radius: 13px;
-    position: relative;
+    position: absolute;
+    bottom: 4rem;
+    margin-bottom: 1rem;
+    right: 0;
     padding:  0.5rem;
     background-color: var(--white);
     display: flex;
