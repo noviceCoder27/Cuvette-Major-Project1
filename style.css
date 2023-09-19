@@ -367,7 +367,8 @@ li::marker {
 }
 .victory {
     position: relative;
-    margin-top: 2rem;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .victory-image {
