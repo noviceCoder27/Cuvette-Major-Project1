@@ -216,10 +216,10 @@ const toggleRuleBox = () => {
     const closeButton = document.querySelector('.cross'); 
     const openButton = document.querySelector('.rules');
     openButton.addEventListener('click', () => {
-        rulesBox.classList.remove('rule-hide');
+        rulesBox.classList.remove('hide');
     });
     closeButton.addEventListener('click', () => {
-        rulesBox.classList.add('rule-hide');
+        rulesBox.classList.add('hide');
     });
 }
 

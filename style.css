@@ -49,6 +49,8 @@ body {
     border: 2px solid var(--white);
     border-radius: 13px;
     padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .title {
@@ -413,14 +415,63 @@ li::marker {
     box-shadow: none;
 }
 
-.rule-hide {
-    opacity: 0;
-}
-
 .hide {
     display: none;
 }
 
 
+@media screen and (max-width: 500px) {
 
+    .title {
+        display: flex;
+        gap: 0.5rem;
+    }
 
+    .score-card {
+        justify-content: center;
+    }
+
+    .computer, .player {
+        padding: 0 0.5rem;
+    }
+    .play-btns {
+        min-width: 300px;
+    }
+    .bottom-section {
+        padding-top: 4rem;
+    }
+
+    .play-btn {
+        width: 6rem;
+        height: 6rem;
+        padding: 0.5rem;
+    }
+    .play-btn img{
+        width: 100%;
+    }
+    
+    .Scissors-btn img {
+        width: 60%;
+    }
+
+    .Paper-btn {
+        min-width: 6rem;
+    }
+
+    .round-result {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .result-text, .main-text,.sub-text {
+        font-size: 1.5rem;
+    }
+
+    .result-text {
+        margin-top: -5rem;
+    }
+
+    .rules,.next,.reset{
+        font-size: 1rem;
+    }
+}
